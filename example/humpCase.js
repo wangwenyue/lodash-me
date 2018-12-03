@@ -18,9 +18,14 @@ const testData = {
 const log = console.log.bind(console, '### humpCase')
 
 const toHumpCase = str => {
-  [head, ...tail] =  str.split('_')
+  const [head, ...tail] =  str.split('_')
   tail.map((val, index) => {
-    tail[index] = val.toUpperCase()
+    if(val.length > 1) {
+      const [h, ...t] = val
+      tail[index] = [h.toUpperCase(), ...t].join('')
+    } else{
+      tail[index] = val.toUpperCase()
+    }
   })
   return [head, ...tail].join('')
 }
