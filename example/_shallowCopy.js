@@ -51,11 +51,25 @@ const test3 = () => {
 // ### after b [ 1, [ 1, 5, 3 ], 3 ]
 // ### after a [ 1, [ 1, 5, 3 ], 3 ]
 
+// test4 is deep copy of test3
+const test4 = () => {
+  const a = [1, [1, 2, 3], 3,]
+  const b = JSON.parse(JSON.stringify(a))
+  log('before b', b)
+  b[1][1] = 5
+  log('after b', b)
+  log('after a', a)
+}
+
+// ### shallowCopy before b[1, [1, 2, 3], 3]
+// ### shallowCopy after b[1, [1, 5, 3], 3]
+// ### shallowCopy after a[1, [1, 2, 3], 3]
 
 const __main = () => {
   test1()
   test2()
   test3()
+  test4()
 }
 
 __main()
