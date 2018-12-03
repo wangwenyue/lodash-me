@@ -46,7 +46,7 @@ const checkType = obj => {
 
 const helper = (obj, res) => {
   Object.keys(obj).forEach(o => {
-    let key = toHumpCase(o)
+    const key = toHumpCase(o)
     res[key] = checkType(obj[o])
     helper(obj[o], res[key])
   })
