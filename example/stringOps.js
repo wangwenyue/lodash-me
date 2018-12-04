@@ -278,17 +278,17 @@ var testReplace = function () {
 }
 
 const __main = () => {
-  // testZfill()
-  // testLjust()
-  // testRjust()
-  // testCenter()
+  testZfill()
+  testLjust()
+  testRjust()
+  testCenter()
   testIsSpace()
-  // testIsDigit()
-  // testStripLeft()
-  // testStripRight()
-  // testStrip()
-  // testFindIndex()
-  // testReplace()
+  testIsDigit()
+  testStripLeft()
+  testStripRight()
+  testStrip()
+  testFindIndex()
+  testReplace()
 }
 
 __main()
