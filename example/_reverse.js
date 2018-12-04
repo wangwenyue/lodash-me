@@ -1,5 +1,9 @@
 const log = console.log.bind(console, '### reverse')
 
+const ensureEqual = (a, b, message) => {
+  a !== b ? log(`${message}, (${a}) 不等于 (${b})`) : log('测试成功')
+}
+
 const reverse = (str) => {
   const arr = [...str]
   const len = arr.length
@@ -11,10 +15,8 @@ const reverse = (str) => {
 }
 
 const __main = () => {
-  const str1 = 'Kowal$ki'
-  const str2 = 'abc'
-  log(reverse(str1))
-  log(reverse(str2))
+  ensureEqual(reverse('Kowal$ki'), 'ik$lawoK', 'reverse1 error')
+  ensureEqual(reverse('abc'), 'cba', 'reverse2 error')
 }
 
 __main()

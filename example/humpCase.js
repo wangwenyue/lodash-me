@@ -1,3 +1,5 @@
+const log = console.log.bind(console, '### humpCase')
+
 const testData = {
   a_bbb: 123,
   a_g: [1, 2, 3, 4],
@@ -14,8 +16,6 @@ const testData = {
  *  @returns {object | array} 处理后的对象或数组
  *
  **/
-
-const log = console.log.bind(console, '### humpCase')
 
 const toHumpCase = str => {
   const [head, ...tail] =  str.split('_')
@@ -52,10 +52,23 @@ const helper = (obj, res) => {
   })
 }
 
-const __main = () => {
+const humpCase = () => {
   const res = {}
   helper(testData, res)
-  log('res', res)
+  return res
+}
+
+const testDataToHumpCase = {
+  aBbb: 123,
+  aG: [1, 2, 3, 4],
+  aD: { s: 2, sD: 3 },
+  aF: [1, 2, 3, { aG: 5 }],
+  aDS: 1
+}
+
+const __main = () => {
+  log(humpCase())
+  log('testDataToHumpCase', testDataToHumpCase)
 }
 
 __main()
