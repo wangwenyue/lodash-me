@@ -113,13 +113,16 @@ const testCenter = () => {
 */
 
 const isSpace = s => {
+  if(s.length === 0) {
+    return false
+  }
   return s.trim().length === 0
 }
 
 const testIsSpace = () => {
   ensureEqual(isSpace(' '), true, 'isSpace error 1')
   ensureEqual(isSpace('   '), true, 'isSpace error 2')
-  ensureEqual(isSpace(''), true, 'isSpace error 3')
+  ensureEqual(isSpace(''), false, 'isSpace error 3')
   ensureEqual(isSpace('koa'), false, 'isSpace error 4')
 }
 
@@ -275,17 +278,17 @@ var testReplace = function () {
 }
 
 const __main = () => {
-  testZfill()
-  testLjust()
-  testRjust()
-  testCenter()
+  // testZfill()
+  // testLjust()
+  // testRjust()
+  // testCenter()
   testIsSpace()
-  testIsDigit()
-  testStripLeft()
-  testStripRight()
-  testStrip()
-  testFindIndex()
-  testReplace()
+  // testIsDigit()
+  // testStripLeft()
+  // testStripRight()
+  // testStrip()
+  // testFindIndex()
+  // testReplace()
 }
 
 __main()
