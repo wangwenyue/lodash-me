@@ -14,9 +14,12 @@ const reverse = (str) => {
   return newArr.join('')
 }
 
-const __main = () => {
+const testReverse = () => {
   ensureEqual(reverse('Kowal$ki'), 'ik$lawoK', 'reverse1 error')
   ensureEqual(reverse('abc'), 'cba', 'reverse2 error')
+}
+const __main = () => {
+  testReverse()
 }
 
 __main()
