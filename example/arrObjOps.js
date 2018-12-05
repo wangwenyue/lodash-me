@@ -166,7 +166,7 @@ const testEndsWith = () => {
 // 实现 Max 函数
 const max = arr => {
   let [head, ...tails] = arr
-  tails.map((val, index) => {
+  tails.map(val => {
     head = val > head ? val : head
   })
   return head
