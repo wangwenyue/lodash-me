@@ -285,4 +285,5 @@ const __main = () => {
   testTopStudent()
   testDiscount()
 }
+
 __main()
