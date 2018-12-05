@@ -8,14 +8,6 @@ const ensureEqual = (a, b, message) => {
   s1 是一个字符串
   s2 是一个字符串
   检查 s1 是否以 s2 开头, 返回 true 或者 false
-
-  提示：
-      假设 s2 的长度为 len，获取 s1 的前 len 个字符，判断是否与 s2 相等
-
-  分步提示：
-      1. 计算出 s2 的长度 len
-      2. 使用 slice 获取 s1 的前 len 个字符，结果为 s
-      3. 返回 s 与 s2 的比较结果
 */
 
 const startsWith = (s1, s2) => {
@@ -38,15 +30,6 @@ const testStartsWith = () => {
   s2 是一个长度为 1 的字符串
   返回参数 s2 在 s1 中第一次出现的下标
   如果 s2 没有在 s1 中出现, 返回 -1
-
-  提示：
-      因为 s2 的长度为 1，所以遍历 s1，判断每次遍历的结果是否与 s2 相等
-
-  分步提示：
-      1. 定义变量 index，用来表示第一次出现的下标，初始值为 -1
-      2. 遍历字符串 s1，判断每次遍历的结果是否等于 s2
-          如果相等，把 i 赋值给 index，并且用 break 跳出当前循环
-      3. 循环结束后 index 的结果就是第一次出现的下标，返回 index
 */
 
 const findIndex = (s1, s2) => {
@@ -88,21 +71,6 @@ const testArrayEquals = () => {
   s2 是一个长度为 1 的字符串
   返回参数 s2 在 s1 中出现的所有下标组成的 array
   如果 s2 没有在 s1 中出现, 返回空数组 []
-
-  提示：
-      这道题目和 findIn 比较类型，但是需要记住所有出现的下标，这个就可以用数组来存储了
-      数组的判断不能直接用 ==，所以我们要先实现一个 arrayEquals 的函数
-
-  分步提示：
-      1. 实现 arrayEquals 函数，有两个参数 a1 和 a2
-          a. 首先判断 a1 和 a2 的长度是否相等，如果不相等，直接返回 false
-          b. 遍历数组 a1，每次遍历的元素为 a1[i]，判断 a1[i] 与 a2[i] 的值
-              如果 a1[i] 与 a2[i] 不相等，直接返回 false
-          c. 循环结束后，返回 true
-      2. 定义一个数组 result 用来存储所有的下标，初始值为 []
-      3. 遍历字符串 s1, 如果遍历的元素与 s2 相等，就把 i 添加到数组 result 中
-      4. 循环结束后 result 存储的是所有满足条件的下标，最后返回 result
-      5. 在 ensure 函数中比较两个数组使用 arrayEquals 函数
 */
 
 const findAllIndex = (s1, s2) => {
@@ -136,18 +104,6 @@ const testFindAllIndex = () => {
   s2 是一个字符串, 长度未知, 不一定为 1
   返回参数 s2 在 s1 中出现的下标组成的 array
   如果 s2 没有在 s1 中出现, 返回 []
-
-  提示：
-      遍历字符串 s1，每次 slice 一个字符串 s，比较 s 与 s2 的值
-
-  分步提示：
-      1. 定义一个数组 result 用来存储所有的下标，初始值为 []
-      2. 计算 s2 的长度 len
-      3. 遍历字符串 s1, 并且在每次遍历中 slice 一个字符串 s，
-          slice 的起始坐标为 i，slice 的长度为 len
-          如果遍历的元素与 s2 相等，就把 i 添加到数组 result 中
-      4. 循环结束后 result 存储的是所有满足条件的下标，最后返回 result
-      5. 在 ensure 函数中比较两个数组使用 arrayEquals 函数
 */
 
 const findAllString = (s1, s2) => {
@@ -179,14 +135,6 @@ const testFindAllString = () => {
   s1 是一个字符串
   s2 是一个字符串
   检查 s1 是否以 s2 结尾, 返回 true 或者 false
-
-  提示：
-      假设 s2 的长度为 len，获取 s1 的最后 len 个字符，判断是否与 s2 相等
-
-  分步提示：
-      1. 计算出 s2 的长度 len
-      2. 使用 slice 获取 s1 的后 len 个字符，结果为 s
-      3. 返回 s 与 s2 的比较结果
 */
 
 // 直接调用 startsWith
@@ -239,18 +187,6 @@ const testMax = () => {
       'score': 107,
   }
   返回 score 最高的那个元素(object)
-
-  提示：
-      遍历 array，把 array 中的 score 存到一个数组 list 中，
-      使用以前作业的 max 函数来得到 list 中最大元素
-      使用以前作业的 find 函数得到最大元素在 list 中的下标 index
-      array[list] 就是最后计算出来的结果
-
-  分步提示：
-      1. 遍历 array，每次遍历得到 object，把 object 的 score 存到一个数组 list 中，
-      2. 使用以前作业的 max 函数来得到 list 中最大元素 element
-      3. 使用以前作业的 find 函数得到 element 在 list 中的下标 index
-      4. array[list] 就是最后计算出来的结果
 */
 
 const topStudent = obj => {
