@@ -40,7 +40,7 @@ const testFind = () => {
 const lowerCase = str => {
   const arrStr = [...str]
   let res = ''
-  arrStr.map((char, index) => {
+  arrStr.map(char => {
     const idx = find(upper, char)
     res += lower[idx]
   })
@@ -63,7 +63,7 @@ const testLowerCase = () => {
 const upperCase = str => {
   const arrStr = [...str]
   let res = ''
-  arrStr.map((char, index) => {
+  arrStr.map(char => {
     const idx = find(lower, char)
     res += upper[idx]
   })
@@ -84,7 +84,7 @@ const testUpperCase = () => {
 const lowerCase1 = str => {
   const arrStr = [...str]
   let res = ''
-  arrStr.map((char, index) => {
+  arrStr.map(char => {
     const idx = find(upper, char)
     res = idx === -1 ? res + char : res + lower[idx]
   })
@@ -105,7 +105,7 @@ const testLowerCase1 = () => {
 const upperCase1 = str => {
   const arrStr = [...str]
   let res = ''
-  arrStr.map((char, index) => {
+  arrStr.map(char => {
     const idx = find(lower, char)
     res = idx === -1 ? res + char : res + upper[idx]
   })
@@ -133,7 +133,7 @@ const testUpperCase1 = () => {
 const encode1 = str => {
   const arrStr = [...str]
   let res = ''
-  arrStr.map((char, index) => {
+  arrStr.map(char => {
     let idx = find(lower, char)
     idx = (idx + 1) % lower.length
     res += lower[idx]
@@ -157,7 +157,7 @@ const testEncode1 = () => {
 const decode1 = str => {
   const arrStr = [...str]
   let res =''
-  arrStr.map((char, index) => {
+  arrStr.map(char => {
     let idx = find(lower, char)
     // 加上 lower.length 防止 idx - 1 为负数
     idx = (lower.length + idx - 1) % lower.length
@@ -184,7 +184,7 @@ const testDecode1 = () => {
 const encode2 = (str, shift) => {
   const arrStr = [...str]
   let res = ''
-  arrStr.map((char, index) => {
+  arrStr.map(char => {
     let idx = find(lower, char)
     idx = (idx + shift) % lower.length
     res += lower[idx]
@@ -208,7 +208,7 @@ const testEncode2 = () => {
 const decode2 = (str, shift) => {
   const arrStr = [...str]
   let res = ''
-  arrStr.map((char, index) => {
+  arrStr.map(char => {
     let idx = find(lower, char)
     idx = (lower.length + idx - shift) % lower.length
     res += lower[idx]
@@ -234,7 +234,7 @@ const testDecode2 = () => {
 const encode3 = (str, shift) => {
   const arrStr = [...str]
   let res = ''
-  arrStr.map((char, index) => {
+  arrStr.map(char => {
     let idx = find(lower, char)
     if (idx === -1) {
       res += char
@@ -263,7 +263,7 @@ const testEncode3 = function () {
 const decode3 = (str, shift) => {
   const arrStr = [...str]
   let res = ''
-  arrStr.map((char, index) => {
+  arrStr.map(char => {
     let idx = find(lower, char)
     if (idx === -1) {
       res += char
