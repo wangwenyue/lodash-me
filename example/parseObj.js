@@ -29,15 +29,34 @@ const get = (data, ...args) => {
   })
 }
 
+// 处理非法输入
+const get1 = (data, ...args) => {
+  return args.map(val => {
+    // 将 [] 替换成 .
+    const paths = val.replace(/\[/g, ".").replace(/\]/g, "").split('.')
+    let res = data
+    try {
+      paths.map(path => {
+        res = res[path]
+      })
+    } catch (err) {
+      log(err)
+      res = undefined
+    }
+    return res
+  })
+}
+
 const testGet = () => {
   const obj = { selector: { to: { toutiao: 'FE Coder', meituan: 'BE Coder' } }, target: [1, 2, { name: 'byted', test: 'front end' }] }
   const test1 = get(obj, 'selector.to.toutiao', 'target[0]', 'target[2].name')
   const test2 = get(obj, 'selector.to.toutiao', 'target[1]', 'target[2].test')
-  const test3 = get(obj, 'selector.to.meituan', 'target[1]', 'target[2].name')
+  // target[8] 不存在
+  const test3 = get1(obj, 'selector.to.meituan', 'target[8]', 'target[2].name')
 
   ensureEqual(arrayEquals(test1, ['FE Coder', 1, 'byted']), true, 'get error 1')
   ensureEqual(arrayEquals(test2, ['FE Coder', 2, 'front end']), true, 'get error 1')
-  ensureEqual(arrayEquals(test3, ['BE Coder', 2, 'byted']), true, 'get error 1')
+  ensureEqual(arrayEquals(test3, ['BE Coder', 2, 'byted']), false, 'get error 1')
 }
 
 const __main = () => {
