@@ -45,10 +45,10 @@ const checkType = obj => {
 }
 
 const helper = (obj, res) => {
-  Object.keys(obj).forEach(o => {
-    const key = toHumpCase(o)
-    res[key] = checkType(obj[o])
-    helper(obj[o], res[key])
+  Object.keys(obj).forEach(key => {
+    const newKey = toHumpCase(key)
+    res[newKey] = checkType(obj[key])
+    helper(obj[key], res[newKey])
   })
 }
 

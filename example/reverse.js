@@ -18,6 +18,7 @@ const testReverse = () => {
   ensureEqual(reverse('Kowal$ki'), 'ik$lawoK', 'reverse1 error')
   ensureEqual(reverse('abc'), 'cba', 'reverse2 error')
 }
+
 const __main = () => {
   testReverse()
 }

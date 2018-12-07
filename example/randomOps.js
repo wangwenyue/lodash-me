@@ -11,6 +11,7 @@ const ensureEqual = (a, b, message) => {
 
   用它实现本函数, 返回 0 或 1
 */
+
 const random01 = () => {
   const n = Math.random()
   return n > 0.5 ? 1 : 0
@@ -28,6 +29,7 @@ const _random01 = () => {
 }
 
 // 返回一个 20 ~ 50 之间的数字
+
 const random2050 = () => {
   let n = Math.random()
   // 0 - 30 之间的数字
@@ -37,6 +39,7 @@ const random2050 = () => {
 }
 
 // 返回一个 20 ~ 50 之间的整数
+
 const _random2050 = () => {
   let n = Math.random()
   n = Math.floor(n * 30)
@@ -47,6 +50,7 @@ const _random2050 = () => {
  * n < m, 且 n, m 均为整数,
  * 返回一个 n ~ m 之间的整数
  */
+
 const randomNM = (n, m) => {
   let num = Math.random()
   num = Math.floor(num * (m - n))
@@ -57,6 +61,7 @@ const randomNM = (n, m) => {
  * n < m, 且 n, m, k 均为整数,
  * 返回一个数组，数组大小为 k, 元素是 n ~ m 范围的整数
  */
+
 const randomK = (n, m, k) => {
   const setRes = new Set()
   for (let i = 0; i < k;) {
