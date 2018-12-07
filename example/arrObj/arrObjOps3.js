@@ -108,7 +108,7 @@ const testFindIndex = () => {
   ensureEqual(3, result1, 'test find index 1')
 }
 
-//返回所有符合的元素的下标组成的数组，如果不存在则返回 []
+// 返回所有符合的元素的下标组成的数组，如果不存在则返回 []
 const findAllIndex = (array, callback) => {
   const res = []
   array.map((element, index) => {
