@@ -58,7 +58,7 @@ const int2 = bin => {
 }
 
 const testInt = () => {
-  ensureEqual(int1('00000111'), 7, 'test int 1')
+  ensureEqual(int('00000111'), 7, 'test int 1')
   ensureEqual(int2('01100100'), 100, 'test int 2')
   ensureEqual(int2('11111111'), 255, 'test int 3')
 }
