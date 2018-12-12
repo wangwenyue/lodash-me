@@ -21,7 +21,6 @@ const test11 = () => {
   a()
 }
 
-
 const test2 = () => {
   function a() {
     console.log("world")
@@ -125,7 +124,6 @@ const test66 = () => {
     console.log('call b')
   }
 }
-
 
 const __main = () => {
   test1()
