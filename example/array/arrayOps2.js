@@ -32,7 +32,7 @@ const unique = arr => {
 // 常规做法
 const unique2 = arr => {
   const res = []
-  for (val of arr) {
+  for (let val of arr) {
     if (!res.includes(val)) {
       res.push(val)
     }
@@ -58,7 +58,7 @@ const testUnique = () => {
 
 const intersection = (arr1, arr2) => {
   const res = []
-  for (val of arr1) {
+  for (let val of arr1) {
     if(arr2.includes(val)) {
       res.push(val)
     }
@@ -115,7 +115,7 @@ const testUnion = () => {
 
 const difference = (arr1, arr2) => {
   const res = []
-  for (val of arr1) {
+  for (let val of arr1) {
     if (!arr2.includes(val)) {
       res.push(val)
     }
@@ -175,7 +175,7 @@ const testDifferenceAll = () => {
 */
 
 const isSubset = (arr1, arr2) => {
-  for (val of arr1) {
+  for (let val of arr1) {
     if(!arr2.includes(val)) {
       return false
     }

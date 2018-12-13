@@ -45,7 +45,7 @@ const testArrProduct = () => {
 // min number of array
 const arrMin = arr => {
   let [min, ...rest] = arr
-  for(num of rest) {
+  for(let num of rest) {
     min = min > num ? num : min
   }
   return min
