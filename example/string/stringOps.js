@@ -13,6 +13,12 @@ const nChar = (char, n) => {
   return res
 }
 
+// 调用 repeat 方法， char 必须是字符串类型
+const nChar2 = (char, n) => {
+  char = String(char)
+  return char.repeat(n)
+}
+
 /*
   n 是 int 类型
   width 是 int 类型
@@ -29,11 +35,18 @@ const zfill = (n, width) => {
   return `${nChar(0, len)}${str}`
 }
 
+// 调用 padStart 方法
+const zfill2 = (n, width) => {
+  const str = String(n)
+  // width: int 第二个参数是用来补全的字符串
+  return str.padStart(width, '0')
+}
+
 const testZfill = () => {
-  ensureEqual(zfill(1, 4), '0001', 'zfill error 1')
-  ensureEqual(zfill(23, 4), '0023', 'zfill error 2')
-  ensureEqual(zfill(12345, 4), '12345', 'zfill error 3')
-  ensureEqual(zfill(169, 5), '00169', 'zfill error 4')
+  ensureEqual(zfill2(1, 4), '0001', 'zfill error 1')
+  ensureEqual(zfill2(23, 4), '0023', 'zfill error 2')
+  ensureEqual(zfill2(12345, 4), '12345', 'zfill error 3')
+  ensureEqual(zfill2(169, 5), '00169', 'zfill error 4')
 }
 
 /*
@@ -52,10 +65,16 @@ const ljust = (s, width, fillchar=' ') => {
   return `${s}${nChar(fillchar, len)}`
 }
 
+// 调用 padEnd
+const ljust2 = (s, width, fillchar) => {
+  // fillchar 默认是空格
+  return s.padEnd(width, fillchar)
+}
+
 const testLjust = () => {
-  ensureEqual(ljust('koa', 5), 'koa  ', 'ljust error 1')
-  ensureEqual(ljust('koakoa', 5), 'koakoa', 'ljust error 2')
-  ensureEqual(ljust('koa', 5, '*'), 'koa**', 'ljust error 3')
+  ensureEqual(ljust2('koa', 5), 'koa  ', 'ljust error 1')
+  ensureEqual(ljust2('koakoa', 5), 'koakoa', 'ljust error 2')
+  ensureEqual(ljust2('koa', 5, '*'), 'koa**', 'ljust error 3')
 }
 
 /*
@@ -73,10 +92,16 @@ const rjust = (s, width, fillchar=' ') => {
   return `${nChar(fillchar, len)}${s}`
 }
 
+// 调用 padStart
+const rjust2 = (s, width, fillchar) => {
+  // fillchar 默认是空格
+  return s.padStart(width, fillchar)
+}
+
 const testRjust = () => {
-  ensureEqual(rjust('koa', 5), '  koa', 'rjust error 1')
-  ensureEqual(rjust('koakoa', 5), 'koakoa', 'rjust error 2')
-  ensureEqual(rjust('koa', 5, '*'), '**koa', 'rjust error 3')
+  ensureEqual(rjust2('koa', 5), '  koa', 'rjust error 1')
+  ensureEqual(rjust2('koakoa', 5), 'koakoa', 'rjust error 2')
+  ensureEqual(rjust2('koa', 5, '*'), '**koa', 'rjust error 3')
 }
 
 /*
@@ -272,7 +297,7 @@ const replace = (s, old, newString) => {
   return `${head}${newString}${tail}`
 }
 
-var testReplace = function () {
+const testReplace = () => {
   ensureEqual(replace('hello, world', 'world', 'koa'), 'hello, koa', 'replace error 1')
   ensureEqual(replace('hello', 'll', 'gua'), 'heguao', 'replace error 2')
 }
