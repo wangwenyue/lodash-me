@@ -33,7 +33,7 @@ const testStartsWith = () => {
 */
 
 const findIndex = (s1, s2) => {
-  for (char of s1) {
+  for (let char of s1) {
     if (char === s2) {
       return s1.indexOf(char)
     }
@@ -139,7 +139,9 @@ const testFindAllString = () => {
 
 // 直接调用 startsWith
 const endsWith1 = (s1, s2) => {
-  if (s1.length < s2.length) {
+  const len1 = s1.length
+  const len2 = s2.length
+  if (len1 < len2) {
     return false
   }
   const s1Rev = [...s1].reverse().join()
@@ -149,11 +151,11 @@ const endsWith1 = (s1, s2) => {
 
 // 传统做法
 const endsWith2 = (s1, s2) => {
-  if (s1.length < s2.length) {
-    return false
-  }
   const len1 = s1.length
   const len2 = s2.length
+  if (len1 < len2) {
+    return false
+  }
   return s1.slice(len1 - len2) === s2
 }
 
