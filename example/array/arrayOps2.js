@@ -26,7 +26,7 @@ const arrayEquals = (arr1, arr2) => {
 // 用 set 处理下重复数据，再返回成 array
 const unique = arr => {
   const arrSet = new Set(arr)
-  return Array.from(arrSet)
+  return [...arrSet]
 }
 
 // 常规做法
@@ -66,14 +66,18 @@ const intersection = (arr1, arr2) => {
   return unique(res)
 }
 
+const intersection2 = (arr1, arr2) => {
+  return [... new Set(arr1.filter(ele => arr2.includes(ele)))]
+}
+
 const testIntersection = () => {
   const a = [1, 1, 2, 3, 4]
   const b = [2, 2, 3, 4, 4, 5]
   const c = [1, 4, 6, 8]
 
-  const i1 = intersection(a, b)
-  const i2 = intersection(a, c)
-  const i3 = intersection(b, c)
+  const i1 = intersection2(a, b)
+  const i2 = intersection2(a, c)
+  const i3 = intersection2(b, c)
 
   ensureEqual(arrayEquals(i1, [2, 3, 4]), true, 'intersection test 1')
   ensureEqual(arrayEquals(i2, [1, 4]), true, 'intersection test 2')
@@ -91,14 +95,18 @@ const union = (arr1, arr2) => {
   return unique([...arr1, ...arr2])
 }
 
+const union2 = (arr1, arr2) => {
+  return [... new Set([...arr1, ...arr2])]
+}
+
 const testUnion = () => {
   const a = [1, 2, 3, 4]
   const b = [2, 3, 4, 5]
   const c = [1, 4, 6, 8]
 
-  const u1 = union(a, b)
-  const u2 = union(a, c)
-  const u3 = union(b, c)
+  const u1 = union2(a, b)
+  const u2 = union2(a, c)
+  const u3 = union2(b, c)
 
   ensureEqual(arrayEquals(u1, [1, 2, 3, 4, 5]), true, 'union test 1')
   ensureEqual(arrayEquals(u2, [1, 2, 3, 4, 6, 8]), true, 'union test 2')
@@ -123,14 +131,18 @@ const difference = (arr1, arr2) => {
   return unique(res)
 }
 
+const difference2 = (arr1, arr2) => {
+  return [... new Set(arr1.filter(ele => !arr2.includes(ele)))]
+}
+
 const testDifference = () => {
   const a = [1, 2, 3, 4]
   const b = [2, 3, 4, 5]
   const c = [1, 4, 6, 8]
 
-  const d1 = difference(a, b)
-  const d2 = difference(a, c)
-  const d3 = difference(b, c)
+  const d1 = difference2(a, b)
+  const d2 = difference2(a, c)
+  const d3 = difference2(b, c)
 
   ensureEqual(arrayEquals(d1, [1]), true, 'difference test 1')
   ensureEqual(arrayEquals(d2, [2, 3]), true, 'difference test 2')
@@ -183,9 +195,11 @@ const isSubset = (arr1, arr2) => {
   return true
 }
 
+const isSubset2 = (arr1, arr2) => arr1.every(ele => arr2.includes(ele))
+
 const testIsSubset = () => {
-  const test1 = isSubset([1, 2, 3], [1, 2, 3, 4])
-  const test2 = isSubset([1, 2], [2, 3, 4])
+  const test1 = isSubset2([1, 2, 3], [1, 2, 3, 4])
+  const test2 = isSubset2([1, 2], [2, 3, 4])
 
   ensureEqual(test1, true, 'test is subset 1')
   ensureEqual(test2, false, 'test is subset 2')
