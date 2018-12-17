@@ -1,6 +1,6 @@
-const log = console.log.bind(console, '### shallowCopy')
+const log = console.log.bind(console, '### shallowClone')
 
-const shallowCopy = (src) => {
+const shallowClone = src => {
   let dst = {}
   for(let prop in src) {
     if(src.hasOwnProperty(prop)){

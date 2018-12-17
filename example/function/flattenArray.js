@@ -18,7 +18,7 @@ const arrayEquals = (arr1, arr2) => {
 
 // 这里用了一个全局变量，不好
 const res = []
-const flattenArray = arr => {
+const flattenArray = (arr) => {
   for (let ele of arr) {
     if (Array.isArray(ele)) {
       flattenArray(ele)
