@@ -29,6 +29,9 @@ const flattenArray = arr => {
   return res
 }
 
+// arrary.flat([depth]) node 不支持，chrome 支持的原生方法
+// return arr.flat(2) // [1, 2, 3, 4, 5, 6]
+
 const testFlattenArray = () => {
   const arr = [1, [[2, 3], 4], [5, 6]]
   const test1 = [1, 2, 3, 4, 5, 6]
