@@ -10,19 +10,23 @@ const shallowClone = src => {
   return dst
 }
 
+const shallowClone2 = src => Object.assign({}, src)
+
 const test1 = () => {
   const a = { a: 1, arr: [1, 2, 3,] }
-  const b = shallowCopy(a)
+  const b = shallowClone(a)
+  const c = shallowClone2(a)
   log('before b', b)
   b.arr[0] = 5
   log('after b', b)
   log('after a', a)
+  log('after c', c)
 }
 
 // ### before b { a: 1, arr: [ 1, 2, 3 ] }
 // ### after b { a: 1, arr: [ 5, 2, 3 ] }
 // ### after a { a: 1, arr: [ 5, 2, 3 ] }
-
+// ### after c { a: 1, arr: [ 5, 2, 3 ] }
 
 const test2 = () => {
   const a = [1, 2, 3,]
