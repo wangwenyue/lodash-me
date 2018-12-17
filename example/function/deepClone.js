@@ -1,4 +1,5 @@
 const log = console.log.bind(console, '### deepClone')
+
 const deepClone = obj => {
   // 先 shallow clone
   let clone = Object.assign({}, obj)
