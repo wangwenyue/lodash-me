@@ -37,8 +37,8 @@ const isObject = o => {
 const humpCase = obj => {
   let clone = { ...obj }
   Object.keys(clone).forEach(k => {
-    if (typeof isObject(obj[k]) === 'object') {
-      clone[toHumpCase(k)] = deepClone(obj[k])
+    if (isObject(obj[k])) {
+      clone[toHumpCase(k)] = humpCase(obj[k])
     } else {
       clone[toHumpCase(k)] = obj[k]
     }
@@ -51,6 +51,12 @@ const humpCase = obj => {
   }
 }
 
+const humpCase2 = obj => {
+  let clone = { ...obj }
+  Object.keys(clone).forEach(k => clone[toHumpCase(k)] = isObject(obj[k]) ? humpCase(obj[k]) : obj[k])
+  return Array.isArray(obj) ? (clone.length = obj.length && Array.from(clone)) : clone
+}
+
 const testDataToHumpCase = {
   aBbb: 123,
   aG: [1, 2, 3, 4],
@@ -61,6 +67,7 @@ const testDataToHumpCase = {
 
 const __main = () => {
   log(humpCase(testDataToHumpCase))
+  log(humpCase2(testDataToHumpCase))
   log('testDataToHumpCase', testDataToHumpCase)
 }
 
