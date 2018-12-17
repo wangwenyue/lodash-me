@@ -34,28 +34,21 @@ const isObject = o => {
   return Object.prototype.toString.call(o) === '[object Object]'
 }
 
-const checkType = obj => {
-  if(isObject(obj)) {
-    return {}
-  } else if (Array.isArray(obj)) {
-    return []
-  } else {
-    return obj
-  }
-}
-
-const helper = (obj, res) => {
-  Object.keys(obj).forEach(key => {
-    const newKey = toHumpCase(key)
-    res[newKey] = checkType(obj[key])
-    helper(obj[key], res[newKey])
+const humpCase = obj => {
+  let clone = { ...obj }
+  Object.keys(clone).forEach(k => {
+    if (typeof isObject(obj[k]) === 'object') {
+      clone[toHumpCase(k)] = deepClone(obj[k])
+    } else {
+      clone[toHumpCase(k)] = obj[k]
+    }
   })
-}
-
-const humpCase = () => {
-  const res = {}
-  helper(testData, res)
-  return res
+  if (Array.isArray(obj)) {
+    clone.length = obj.length
+    return Array.from(clone)
+  } else {
+    return clone
+  }
 }
 
 const testDataToHumpCase = {
@@ -67,7 +60,7 @@ const testDataToHumpCase = {
 }
 
 const __main = () => {
-  log(humpCase())
+  log(humpCase(testDataToHumpCase))
   log('testDataToHumpCase', testDataToHumpCase)
 }
 
