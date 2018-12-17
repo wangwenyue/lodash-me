@@ -10,6 +10,7 @@ const deepClone = obj => {
   // 直接 return clone 会返回 arrayLike 的数组，arr: { '0': 1, '1': 3, '2': 100, '3': 7 }
   // 将 array like 的数组转换为真正的数组
   if (Array.isArray(obj)) {
+    // 给 obj 添加 length 属性，才能将 obj 转为 array
     clone.length = obj.length
     return Array.from(clone)
   } else {
