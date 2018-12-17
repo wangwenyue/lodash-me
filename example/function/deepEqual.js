@@ -20,10 +20,24 @@ const equals = (a, b) => {
 
 const equals2 = (a, b) => JSON.stringify(a) === JSON.stringify(b)
 
-const __main = () => {
+const test1 = () => {
   const obj = { a: [2, { e: 3 }], b: [4], c: 'foo', d: undefined, e: null }
   ensureEqual(equals(obj, obj), true, 'test deep equal 1')
   ensureEqual(equals2(obj, obj), true, 'test deep equal 2')
+}
+
+const test2 = () => {
+  // 若调换 obj 中属性的位置，则 equals 报错， equals2 不相等
+  const obj = { a: [2, { e: 3 }], b: [4], c: 'foo', d: undefined, e: null }
+  const obj2 = { b: [4], c: 'foo', d: undefined, e: null, a: [2, { e: 3 }] }
+  ensureEqual(equals(obj, obj2), true, 'test deep equal 1') // 报错
+  ensureEqual(equals2(obj, obj2), true, 'test deep equal 2') // 不相等
+
+}
+
+const __main = () => {
+  test1()
+  // test2()
 }
 
 __main()
