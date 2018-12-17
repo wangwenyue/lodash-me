@@ -2,7 +2,8 @@ const log = console.log.bind(console, '### deepClone')
 
 const deepClone = obj => {
   // 先 shallow clone
-  let clone = Object.assign({}, obj)
+  // let clone = Object.assign({}, obj)
+  let clone = {...obj}
   // 检查每一个 key，若 value 是 obj, 则递归深拷贝，否则直接赋值
   Object.keys(clone).forEach(
     key => (clone[key] = typeof obj[key] === 'object' ? deepClone(obj[key]) : obj[key])
