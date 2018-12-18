@@ -25,8 +25,8 @@ const equals2 = (a, b) => JSON.stringify(a) === JSON.stringify(b)
 const test1 = () => {
   const obj = { a: [2, { e: 3 }], b: [4], c: 'foo', d: undefined, e: null }
   const obj2 = { a: [2, { e: 3 }], b: [4], c: 'foo', d: undefined, e: null }
-  ensureEqual(equal(obj, obj2), true, 'test deep equal 1')
-  ensureEqual(equal2(obj, obj2), true, 'test deep equal 2')
+  ensureEqual(equals(obj, obj2), true, 'test deep equal 1')
+  ensureEqual(equals2(obj, obj2), true, 'test deep equal 2')
 }
 
 const test2 = () => {
