@@ -30,16 +30,13 @@ const flattenArray = arr => {
 
 const flattenArray2 = arr => {
   return arr.reduce((prev, item) => {
-    // log('prev', prev, item)
     return prev.concat(Array.isArray(item) ? flattenArray2(item) : item)
   }, [])
 }
 
 const flattenArray3 = arr => {
   while(arr.some(item => Array.isArray(item))) {
-    // log('...arr', ...arr)
     arr = [].concat(...arr)
-    // log('arr', arr)
   }
   return arr
 }
