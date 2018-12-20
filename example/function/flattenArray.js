@@ -16,17 +16,32 @@ const arrayEquals = (arr1, arr2) => {
   return true
 }
 
-// 这里用了一个全局变量，不好
-const res = []
-const flattenArray = (arr) => {
+const flattenArray = arr => {
+  let res = []
   for (let ele of arr) {
     if (Array.isArray(ele)) {
-      flattenArray(ele)
+      res = res.concat(flattenArray(ele))
     } else {
       res.push(ele)
     }
   }
   return res
+}
+
+const flattenArray2 = arr => {
+  return arr.reduce((prev, item) => {
+    // log('prev', prev, item)
+    return prev.concat(Array.isArray(item) ? flattenArray2(item) : item)
+  }, [])
+}
+
+const flattenArray3 = arr => {
+  while(arr.some(item => Array.isArray(item))) {
+    // log('...arr', ...arr)
+    arr = [].concat(...arr)
+    // log('arr', arr)
+  }
+  return arr
 }
 
 // arrary.flat([depth]) node 不支持，chrome 支持的原生方法
@@ -35,7 +50,10 @@ const flattenArray = (arr) => {
 const testFlattenArray = () => {
   const arr = [1, [[2, 3], 4], [5, 6]]
   const test1 = [1, 2, 3, 4, 5, 6]
+
   ensureEqual(arrayEquals(flattenArray(arr), test1), true, 'test faltten array 1')
+  ensureEqual(arrayEquals(flattenArray2(arr), test1), true, 'test faltten array 1')
+  ensureEqual(arrayEquals(flattenArray3(arr), test1), true, 'test faltten array 1')
 }
 
 const __main = () => {
