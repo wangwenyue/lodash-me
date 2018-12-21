@@ -19,10 +19,12 @@ const startsWith = (s1, s2) => {
   return s1.slice(0, len2) === s2
 }
 
+const startsWith2 = (s1, s2) => s1.indexOf(s2) === 0
+
 const testStartsWith = () => {
-  ensureEqual(startsWith('koakoa', 'koakoa'), true, 'startsWith error 1')
-  ensureEqual(startsWith('kfckfc', 'melon'), false, 'startsWith error 2')
-  ensureEqual(startsWith('kc', 'kfc'), false, 'startsWith error 3')
+  ensureEqual(startsWith2('koakoa', 'koakoa'), true, 'startsWith error 1')
+  ensureEqual(startsWith2('kfckfc', 'melon'), false, 'startsWith error 2')
+  ensureEqual(startsWith2('kc', 'kfc'), false, 'startsWith error 3')
 }
 
 /*
