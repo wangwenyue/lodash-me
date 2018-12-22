@@ -6,11 +6,9 @@ const ensureEqual = (a, b, message) => {
 
 // 高级版
 const equals = (a, b) => {
-  // 原始类型的判断
   if (a === b) return true
-  // object 的判断
+
   if (a && b && typeof a === 'object' && typeof b === 'object' ) {
-    // array 的判断
     if (Array.isArray(a) && Array.isArray(b)) {
       if (a.length !== b.length) return false
       if (!a.every((item, index) => equals(item, b[index]))) return false
@@ -18,13 +16,12 @@ const equals = (a, b) => {
     }
 
     if (a instanceof Date && b instanceof Date) return a.getTime() === b.getTime()
+
     if (a instanceof RegExp && b instanceof RegExp) return a.toString() === b.toString()
 
     const keys = Object.keys(a)
     if (keys.length !== Object.keys(b).length) return false
-    // 是否属性都存在
     if (!keys.every(key => Object.prototype.hasOwnProperty.call(b, key))) return false
-    // 是否属性的值都相等
     if (!keys.every(key => equals(a[key], b[key]))) return false
     return true
   }
