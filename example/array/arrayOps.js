@@ -1,21 +1,18 @@
 const log = console.log.bind(console, '### arrOps')
 
-const ensureEqual = (a, b, message) => {
-  a !== b ? log(`${message}, (${a}) 不等于 (${b})`) : log('测试成功')
-}
+const ensureEqual = (a, b, message) => a !== b ? log(`${message}, (${a}) 不等于 (${b})`) : log('测试成功')
 
 // sum of array
 const arrSum1 = arr => {
   let s = 0
-  for (let i = 0; i < arr.length; i++) {
+  const len = arr.length
+  for (let i = 0; i < len; i++) {
     s += arr[i]
   }
   return s
 }
 
-const arrSum2 = arr => {
-  return arr.reduce((a, b) => a + b)
-}
+const arrSum2 = arr => arr.reduce((a, b) => a + b)
 
 const testArrSum = () => {
   ensureEqual(arrSum1([1, 2, 3, 4]), 10, 'arrSum1 error 1')
@@ -26,15 +23,14 @@ const testArrSum = () => {
 //product of array
 const arrProduct1 = arr => {
   let s = 1
-  for (let i = 0; i < arr.length; i++) {
+  const len = arr.length
+  for (let i = 0; i < len; i++) {
     s *= arr[i]
   }
   return s
 }
 
-const arrProduct2 = arr => {
-  return arr.reduce((a, b) => a * b)
-}
+const arrProduct2 = arr => arr.reduce((a, b) => a * b)
 
 const testArrProduct = () => {
   ensureEqual(arrProduct1([1, 2, 3, 4]), 24, 'arrProduct1 error 1')
@@ -51,6 +47,8 @@ const arrMin = arr => {
   return min
 }
 
+const arrMin2 = arr => Math.min(...arr)
+
 const testArrMin = () => {
   ensureEqual(arrMin([1, 2, 3, 4]), 1, 'arrMin error 1')
   ensureEqual(arrMin([-10, 2, 3, 4]), -10, 'arrMin error 2')
@@ -60,16 +58,23 @@ const testArrMin = () => {
 // factorial of n
 const arrFac = n => {
   let s = 1
-  for (let i = 1; i < n + 1; i++) {
-    s = s * i
+  const len = n + 1
+  for (let i = 1; i < len; i++) {
+    s *= i
   }
   return s
 }
 
+// n 太大会爆栈
+const arrFac2 = n => n === 1 ? n : n * arrFac2(n - 1)
+
+// 尾递归优化
+const arrFac3 = (n, total = 1) => n === 1 ? total : arrFac3(n - 1, n * total)
+
 const testArrFac = () => {
-  ensureEqual(arrFac(6), 720, 'arrFac error 1')
-  ensureEqual(arrFac(5), 120, 'arrFac error 2')
-  ensureEqual(arrFac(2), 2, 'arrFac error 3')
+  ensureEqual(arrFac3(6), 720, 'arrFac error 1')
+  ensureEqual(arrFac2(5), 120, 'arrFac error 2')
+  ensureEqual(arrFac2(2), 2, 'arrFac error 3')
 }
 
 const __main = () => {
