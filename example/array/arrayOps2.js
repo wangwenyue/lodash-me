@@ -5,15 +5,8 @@ const ensureEqual = (a, b, message) => {
 }
 
 const arrayEquals = (arr1, arr2) => {
-  if (arr1.length !== arr2.length) {
-    return false
-  }
-  for (let idx = 0; idx < arr1.length; idx++) {
-    if (arr1[idx] !== arr2[idx]) {
-      return false
-    }
-  }
-  return true
+  if (arr1.length !== arr2.length) return false
+  return arr1.every((val, index) => val === arr2[index])
 }
 
 /*
@@ -24,19 +17,16 @@ const arrayEquals = (arr1, arr2) => {
 */
 
 // 用 set 处理下重复数据，再返回成 array
-const unique = arr => {
-  const arrSet = new Set(arr)
-  return [...arrSet]
-}
+const unique = arr => [...new Set(arr)]
 
 // 常规做法
 const unique2 = arr => {
   const res = []
-  for (let val of arr) {
+  arr.map(val => {
     if (!res.includes(val)) {
       res.push(val)
     }
-  }
+  })
   return res
 }
 
@@ -51,24 +41,17 @@ const testUnique = () => {
 /*
   arr1 arr2 都是 array
 
-  返回一个 array, 里面的元素是同时出现在 arr1 arr2 中的元素
-  也就是取交集
+  返回一个 array, 里面的元素是同时出现在 arr1 arr2 中的元素, 也就是取交集
   这个 array 中不包含重复元素
 */
 
 const intersection = (arr1, arr2) => {
-  const res = []
-  for (let val of arr1) {
-    if(arr2.includes(val)) {
-      res.push(val)
-    }
-  }
+  let res = []
+  res = arr1.filter(val => arr2.includes(val))
   return unique(res)
 }
 
-const intersection2 = (arr1, arr2) => {
-  return [... new Set(arr1.filter(ele => arr2.includes(ele)))]
-}
+const intersection2 = (arr1, arr2) => [... new Set(arr1.filter(ele => arr2.includes(ele)))]
 
 const testIntersection = () => {
   const a = [1, 1, 2, 3, 4]
@@ -91,13 +74,9 @@ const testIntersection = () => {
   这个 array 中不包含重复元素
 */
 
-const union = (arr1, arr2) => {
-  return unique([...arr1, ...arr2])
-}
+const union = (arr1, arr2) => unique([...arr1, ...arr2])
 
-const union2 = (arr1, arr2) => {
-  return [... new Set([...arr1, ...arr2])]
-}
+const union2 = (arr1, arr2) => [... new Set([...arr1, ...arr2])]
 
 const testUnion = () => {
   const a = [1, 2, 3, 4]
@@ -122,18 +101,12 @@ const testUnion = () => {
 */
 
 const difference = (arr1, arr2) => {
-  const res = []
-  for (let val of arr1) {
-    if (!arr2.includes(val)) {
-      res.push(val)
-    }
-  }
+  let res = []
+  res = arr1.filter(val => !arr2.includes(val))
   return unique(res)
 }
 
-const difference2 = (arr1, arr2) => {
-  return [... new Set(arr1.filter(ele => !arr2.includes(ele)))]
-}
+const difference2 = (arr1, arr2) => [... new Set(arr1.filter(ele => !arr2.includes(ele)))]
 
 const testDifference = () => {
   const a = [1, 2, 3, 4]
