@@ -13,10 +13,7 @@ const ensureEqual = (a, b, message) => {
 const startsWith = (s1, s2) => {
   const len1 = s1.length
   const len2 = s2.length
-  if (len1 < len2) {
-    return false
-  }
-  return s1.slice(0, len2) === s2
+  return len1 < len2 ? false : s1.slice(0, len2) === s2
 }
 
 const startsWith2 = (s1, s2) => s1.indexOf(s2) === 0
@@ -35,6 +32,10 @@ const testStartsWith = () => {
 */
 
 const findIndex = (s1, s2) => {
+  // 不能用 map， 没法 break
+  // s1.map((char, index) => {
+  //   if (char === s2) return index
+  // })
   for (let char of s1) {
     if (char === s2) {
       return s1.indexOf(char)
@@ -51,15 +52,8 @@ const testFindIndex = () => {
 
 // 判断数组相等
 const arrayEquals = (arr1, arr2) => {
-  if (arr1.length !== arr2.length) {
-    return false
-  }
-  for (let idx = 0; idx < arr1.length; idx++) {
-    if(arr1[idx] !== arr2[idx]) {
-      return false
-    }
-  }
-  return true
+  if (arr1.length !== arr2.length) return false
+  return arr1.every((val, index) => val === arr2[index])
 }
 
 const testArrayEquals = () => {
@@ -76,15 +70,11 @@ const testArrayEquals = () => {
 */
 
 const findAllIndex = (s1, s2) => {
-  if (s1.length < s2.length) {
-    return []
-  }
-  const arrS1 = [...s1]
   const res = []
+  if (s1.length < s2.length) return res
+  const arrS1 = [...s1]
   arrS1.map((char, idx) => {
-    if(char === s2) {
-      res.push(idx)
-    }
+    if (char === s2) res.push(idx)
   })
   return res
 }
@@ -109,16 +99,12 @@ const testFindAllIndex = () => {
 */
 
 const findAllString = (s1, s2) => {
+  const res = []
   const len1 = s1.length
   const len2 = s2.length
-  if (len1 < len2) {
-    return []
-  }
-  const res = []
+  if (len1 < len2) return res
   for (let idx = 0; idx < len1; idx++) {
-    if(s1.slice(idx, idx + len2) === s2) {
-      res.push(idx)
-    }
+    if (s1.slice(idx, idx + len2) === s2) res.push(idx)
   }
   return res
 }
@@ -155,10 +141,7 @@ const endsWith1 = (s1, s2) => {
 const endsWith2 = (s1, s2) => {
   const len1 = s1.length
   const len2 = s2.length
-  if (len1 < len2) {
-    return false
-  }
-  return s1.slice(len1 - len2) === s2
+  return len1 < len2 ? false : s1.slice(len1 - len2) === s2
 }
 
 const testEndsWith = () => {
@@ -176,10 +159,12 @@ const max = arr => {
   return head
 }
 
+const max2 = arr => Math.max(...arr)
+
 const testMax = () => {
   ensureEqual(max([1, 2, 3]), 3, 'max error 1')
   ensureEqual(max([-1, 10, 3]), 10, 'max error 2')
-  ensureEqual(max([1, 2, 2]), 2, 'max error 3')
+  ensureEqual(max2([1, 2, 2]), 2, 'max error 3')
 }
 
 /*
@@ -195,11 +180,18 @@ const testMax = () => {
 
 const topStudent = obj => {
   const scores = []
-  Object.keys(obj).forEach(o => {
-    scores.push(obj[o].score)
-  })
+  Object.keys(obj).map(o => scores.push(obj[o].score))
   const idx = scores.indexOf(max(scores))
   return obj[idx]
+}
+
+const topStudent2 = obj => scores = obj.sort(compare('score'))[0]
+
+const compare = prop => {
+  return function (a, b) {
+    // b - a 降序排列
+    return b[prop] - a[prop]
+  }
 }
 
 const testTopStudent = () => {
@@ -235,7 +227,8 @@ const testTopStudent = () => {
     'sex': 'female',
     'score': 145,
   }
-  log(topStudent(studentList))
+  log('topStudent', topStudent(studentList))
+  log('topStudent2', topStudent2(studentList))
   log(Evelynn)
 }
 
@@ -264,11 +257,7 @@ const discount = (price, grade) => {
     '大学生': 0.8,
     '研究生': 0.9,
   }
-  if (grade === undefined) {
-    return price
-  }
-  const dis = d[grade]
-  return price * dis
+  return grade === undefined ? price : price * d[grade]
 }
 
 const testDiscount = () => {
