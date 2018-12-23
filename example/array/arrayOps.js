@@ -72,7 +72,7 @@ const arrFac2 = n => n === 1 ? n : n * arrFac2(n - 1)
 const arrFac3 = (n, total = 1) => n === 1 ? total : arrFac3(n - 1, n * total)
 
 const testArrFac = () => {
-  ensureEqual(arrFac3(6), 720, 'arrFac error 1')
+  ensureEqual(arrFac3(7), 5040, 'arrFac error 1')
   ensureEqual(arrFac2(5), 120, 'arrFac error 2')
   ensureEqual(arrFac2(2), 2, 'arrFac error 3')
 }
