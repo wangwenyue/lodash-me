@@ -11,7 +11,7 @@ const deepEquals = (a, b) => {
   if (a && b && typeof a === 'object' && typeof b === 'object' ) {
     if (Array.isArray(a) && Array.isArray(b)) {
       if (a.length !== b.length) return false
-      if (!a.every((item, index) => equals(item, b[index]))) return false
+      if (!a.every((item, index) => deepEquals(item, b[index]))) return false
       return true
     }
 
@@ -22,7 +22,7 @@ const deepEquals = (a, b) => {
     const keys = Object.keys(a)
     if (keys.length !== Object.keys(b).length) return false
     if (!keys.every(key => Object.prototype.hasOwnProperty.call(b, key))) return false
-    if (!keys.every(key => equals(a[key], b[key]))) return false
+    if (!keys.every(key => deepEquals(a[key], b[key]))) return false
     return true
   }
 }
@@ -37,7 +37,7 @@ const deepEquals2 = (a, b) => {
       const len = a.length
       if (len !== b.length) return false
       for (let i = 0; i < len; i++) {
-        if (!equals2(a[i], b[i])) return false
+        if (!deepEquals2(a[i], b[i])) return false
       }
       return true
     }
@@ -56,7 +56,7 @@ const deepEquals2 = (a, b) => {
     // 所有属性是否相等
     for (let i = 0; i < len; i++) {
       const key = keys[i]
-      if (!equals2(a[key], b[key])) return false
+      if (!deepEquals2(a[key], b[key])) return false
     }
     return true
   }
