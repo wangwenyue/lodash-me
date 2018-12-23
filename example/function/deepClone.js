@@ -1,5 +1,6 @@
 const log = console.log.bind(console, '### deepClone')
 
+// 有点麻烦
 const deepClone = obj => {
   // 先 shallow clone
   // let clone = Object.assign({}, obj)
@@ -22,7 +23,7 @@ const deepClone = obj => {
   // return Array.isArray(obj) ? (clone.length = obj.length) && Array.from(clone) : clone
 }
 
-// 最简单的办法，不过有点缺陷，某些特殊情况不能用，比如值是 undefined
+// 最简单的办法，不过有点缺陷，某些特殊情况不能用，比如值是 function
 const deepClone2 = obj => JSON.parse(JSON.stringify(obj))
 
 // ruanyifeng version http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance_continued.html
@@ -38,11 +39,23 @@ function deepCopy(p, c={}) {
   return c
 }
 
+const deepClone3 = (p, c={}) => {
+  Object.keys(p).forEach(key => {
+    if (typeof p[key] === 'object') {
+      c[key] = Array.isArray(p[key]) ? [] : {}
+      deepClone3(p[key], c[key])
+    } else {
+      c[key] = p[key]
+    }
+  })
+  return c
+}
+
 const testDeepClone = () => {
   const a = { foo: 'bar', obj: { a: 1, b: 2 }, arr: [1, 3, 5, 7] }
-  const b = deepCopy(a)
+  const b = deepClone3(a)
   b.foo = 'foo of b'
-  const c = deepCopy(a)
+  const c = deepClone3(a)
   c.arr[1] = 9
   log(a)
   log(b)
