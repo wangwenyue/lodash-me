@@ -86,9 +86,9 @@ const test4 = () => {
 
 const __main = () => {
   test1()
-  // test2()
-  // test3()
-  // test4()
+  test2()
+  test3()
+  test4()
 }
 
 __main()
