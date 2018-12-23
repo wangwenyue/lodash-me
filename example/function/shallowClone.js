@@ -25,8 +25,6 @@ const test1 = () => {
   const d = shallowClone3(a)
   log('before b', b)
   b.arr[0] = 5
-  // a,b,c,d 的 arr 并不是都指向同一个地址 ？？？
-  log(a['arr'] === b['arr'] === c['arr'] === d['arr']) // false
   log('after b', b)
   log('after a', a)
   log('after c', c)
