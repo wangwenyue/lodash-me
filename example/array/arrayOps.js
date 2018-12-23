@@ -50,8 +50,8 @@ const arrMin = arr => {
 const arrMin2 = arr => Math.min(...arr)
 
 const testArrMin = () => {
-  ensureEqual(arrMin([1, 2, 3, 4]), 1, 'arrMin error 1')
-  ensureEqual(arrMin([-10, 2, 3, 4]), -10, 'arrMin error 2')
+  ensureEqual(arrMin2([1, 2, 3, 4]), 1, 'arrMin error 1')
+  ensureEqual(arrMin2([-10, 2, 3, 4]), -10, 'arrMin error 2')
   ensureEqual(arrMin([-1, 2, 3, -4]), -4, 'arrMin error 3')
 }
 
