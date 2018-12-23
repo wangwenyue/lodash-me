@@ -28,6 +28,7 @@ const deepClone2 = obj => JSON.parse(JSON.stringify(obj))
 
 // ruanyifeng version http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance_continued.html
 function deepCopy(p, c={}) {
+  // for in 遍历可枚举自身属性和继承属性
   for (var i in p) {
     if (typeof p[i] === 'object') {
       c[i] = (p[i].constructor === Array) ? [] : {}
@@ -40,6 +41,7 @@ function deepCopy(p, c={}) {
 }
 
 const deepClone3 = (p, c={}) => {
+  // Object.keys() 遍历可枚举自身属性
   Object.keys(p).forEach(key => {
     if (typeof p[key] === 'object') {
       c[key] = Array.isArray(p[key]) ? [] : {}
