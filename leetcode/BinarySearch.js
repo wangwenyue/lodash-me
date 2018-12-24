@@ -15,7 +15,7 @@ const binarySearch = (nums, target) => {
   let end = nums.length - 1
 
   while (start + 1 < end) {
-    // Math.floor 是必须的
+    // Math.floor 处理小数点
     const mid = Math.floor((start + end) / 2)
     nums[mid] < target ? start = mid : end = mid
   }

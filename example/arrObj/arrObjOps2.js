@@ -11,9 +11,7 @@ const arrayEquals = (arr1, arr2) => {
 
 // array equals 的改进版，可以比较多维数组是否相等
 const arrayEquals2 = (arr1, arr2) => {
-  if (arr1.length !== arr2.length) {
-    return false
-  }
+  if (arr1.length !== arr2.length) return false
   return JSON.stringify(arr1) === JSON.stringify(arr2)
 }
 
@@ -48,9 +46,9 @@ const primeNumbers = () => {
 }
 
 const testPrimeNumbers = () => {
-  const result = [2,3,5,7,11,13,17,19,23,29,
-                  31,37,41,43,47,53,59,61,67,
-                  71,73,79,83,89,97]
+  const result = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
+    31, 37, 41, 43, 47, 53, 59, 61, 67,
+    71, 73, 79, 83, 89, 97]
   ensureEqual(arrayEquals2(primeNumbers(), result), true, 'prime numbers test 1')
 }
 
@@ -104,7 +102,7 @@ const letterCount = str => {
   }
   // forEach 也可以
   // Object.keys(count).forEach(key => {
-  //   res.push([key, count[key]])
+  //   count[char] = keys.includes(char) ? count[char] += 1 : 1
   // })
   return Object.keys(count).map(key => [key, count[key]])
 }
@@ -112,9 +110,9 @@ const letterCount = str => {
 const testLetterConunt = () => {
   const test1 = letterCount('foobarbaz')
   const res1 = [
-                ['f', 1], ['o', 2], ['b', 2],
-                ['a', 2], ['r', 1], ['z', 1],
-              ]
+    ['f', 1], ['o', 2], ['b', 2],
+    ['a', 2], ['r', 1], ['z', 1],
+  ]
   ensureEqual(arrayEquals2(test1, res1), true, 'letter count test 1')
 }
 
@@ -132,9 +130,7 @@ const testLetterConunt = () => {
 */
 
 const queryFromObject = param => {
-  return Object.keys(param).map(key => {
-    return `${key}=${param[key]}`
-  }).join('&')
+  return Object.keys(param).map(key => `${key}=${param[key]}`).join('&')
 }
 
 const testQueryFromObject = () => {
@@ -159,10 +155,10 @@ const testQueryFromObject = () => {
 const argsFromQuery = queryString => {
   const arrStr = queryString.split('&')
   const res = {}
-  for (kvs of arrStr) {
+  arrStr.map(kvs => {
     const [key, val] = kvs.split('=')
     res[key] = val
-  }
+  })
   return res
 }
 
@@ -171,7 +167,7 @@ const testArgsFromQuery = () => {
   const str2 = 'foo=1&bar=baz'
 
   const res1 = { foo: '1', bar: '2', baz: 'kfc' }
-  const res2 = {foo: '1', bar: 'baz'}
+  const res2 = { foo: '1', bar: 'baz' }
 
   ensureEqual(arrayEquals2(argsFromQuery(str1), res1), true, 'args from query test 1')
   ensureEqual(arrayEquals2(argsFromQuery(str2), res2), true, 'args from query test 2')

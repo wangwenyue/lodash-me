@@ -1,7 +1,7 @@
 const log = console.log.bind(console, '### underscoreHump')
 
 const ensureEqual = (a, b, msg) => {
-  a !== b ? log(`${msg} ${(a)} 不等于 ${(b)}`) : log('测试成功')
+  a !== b ? log(`${msg} (${a}) 不等于 (${b})`) : log('测试成功')
 }
 
 const deepEquals = (a, b) => {
@@ -26,8 +26,8 @@ const deepEquals = (a, b) => {
     if (cond1 || cond2 || cond3) return false
     return true
   }
-
 }
+
 /**
  *
  * 将一个json数据的所有key从下划线改为驼峰
@@ -38,12 +38,12 @@ const deepEquals = (a, b) => {
  **/
 
 const toHumpCase = str => {
-  const [head, ...tail] =  str.split('_')
+  const [head, ...tail] = str.split('_')
   tail.map((val, index) => {
-    if(val.length > 1) {
+    if (val.length > 1) {
       const [h, ...t] = val
       tail[index] = [h.toUpperCase(), ...t].join('')
-    } else{
+    } else {
       tail[index] = val.toUpperCase()
     }
   })

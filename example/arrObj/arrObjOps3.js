@@ -5,9 +5,7 @@ const ensureEqual = (a, b, message) => {
 }
 
 const arrayEquals = (arr1, arr2) => {
-  if (arr1.length !== arr2.length) {
-    return false
-  }
+  if (arr1.length !== arr2.length) return false
   return JSON.stringify(arr1) === JSON.stringify(arr2)
 }
 
