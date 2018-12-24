@@ -78,10 +78,36 @@ const humpCase3 = (p, c = {}) => {
   return c
 }
 
+const reverseHumpCase = str => {
+  const arrStr = [...str]
+  return arrStr.map(char => {
+    return char = char !== char.toLowerCase() ? `_${char.toLowerCase()}` : char
+    // if (char !== char.toLowerCase()) {
+    //   return char = `_${char.toLowerCase()}`
+    // } else {
+    //   return char
+    // }
+  }).join('')
+}
+
+const reverseH = (p, c = {}) => {
+  // Object.keys() 遍历可枚举自身属性
+  Object.keys(p).forEach(key => {
+    if (typeof p[key] === 'object') {
+      c[reverseHumpCase(key)] = Array.isArray(p[key]) ? [] : {}
+      reverseH(p[key], c[reverseHumpCase(key)])
+    } else {
+      c[reverseHumpCase(key)] = p[key]
+    }
+  })
+  return c
+}
+
 const __main = () => {
   // log(humpCase(testData))
   // log(humpCase2(testData))
   log(humpCase3(testData))
+  log(reverseH(testDataToHumpCase))
   log('testDataToHumpCase', testDataToHumpCase)
 }
 
