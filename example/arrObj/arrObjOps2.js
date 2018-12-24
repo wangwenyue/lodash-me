@@ -24,9 +24,7 @@ const arrayEquals2 = (arr1, arr2) => {
 
 const isPrime = n => {
   for (let i = 2; i < n; i++) {
-    if ( n % i === 0) {
-      return false
-    }
+    if (n % i === 0) return false
   }
   return true
 }
@@ -44,9 +42,7 @@ const testIsPrime = () => {
 const primeNumbers = () => {
   const res = []
   for (let i = 2; i < 100; i++) {
-    if (isPrime(i)) {
-      res.push(i)
-    }
+    if (isPrime(i)) res.push(i)
   }
   return res
 }
@@ -104,21 +100,13 @@ const letterCount = str => {
   const count = {}
   for (char of str) {
     const keys = Object.keys(count)
-    if (keys.includes(char)) {
-      count[char] += 1
-    } else {
-      count[char] = 1
-    }
+    count[char] = keys.includes(char) ? count[char] += 1 : 1
   }
-  const res = []
-  Object.keys(count).map(key => {
-    res.push([key, count[key]])
-  })
   // forEach 也可以
   // Object.keys(count).forEach(key => {
   //   res.push([key, count[key]])
   // })
-  return res
+  return Object.keys(count).map(key => [key, count[key]])
 }
 
 const testLetterConunt = () => {
