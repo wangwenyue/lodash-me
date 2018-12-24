@@ -1,13 +1,5 @@
 const log = console.log.bind(console, '### humpCase')
 
-const testData = {
-  a_bbb: 123,
-  a_g: [1, 2, 3, 4],
-  a_d: { s: 2, s_d: 3 },
-  a_f: [1, 2, 3, { a_g: 5 }],
-  a_d_s: 1
-}
-
 /**
  *
  * 将一个json数据的所有key从下划线改为驼峰
@@ -57,6 +49,47 @@ const humpCase2 = obj => {
   return Array.isArray(obj) ? (clone.length = obj.length && Array.from(clone)) : clone
 }
 
+const humpCase3 = (p, c={}) => {
+  Object.keys(p).map(key => {
+    if (typeof p[key] === 'object') {
+      c[key] = Array.isArray(p[key]) ? [] : {}
+      humpCase3(p[key], c[key])
+    } else {
+      c[key] = p[key]
+    }
+  })
+  return c
+}
+
+const reverseHumpCase = str => {
+  const arrStr = [...str]
+  return arrStr.map(char => {
+    if (char !== char.toLowerCase()) {
+      char = `_${char.toLowerCase()}`
+    }
+  }).join('')
+}
+
+const reverseHump = (p, c = {}) => {
+  Object.keys(p).map(key => {
+    if (typeof p[key] === 'object') {
+      c[key] = Array.isArray(p[key]) ? [] : {}
+      humpCase3(p[key], c[key])
+    } else {
+      c[key] = p[key]
+    }
+  })
+  return c
+}
+
+const testData = {
+  a_bbb: 123,
+  a_g: [1, 2, 3, 4],
+  a_d: { s: 2, s_d: 3 },
+  a_f: [1, 2, 3, { a_g: 5 }],
+  a_d_s: 1
+}
+
 const testDataToHumpCase = {
   aBbb: 123,
   aG: [1, 2, 3, 4],
@@ -67,8 +100,9 @@ const testDataToHumpCase = {
 
 const __main = () => {
   log(humpCase(testData))
-  log(humpCase2(testData))
-  log('testDataToHumpCase', testDataToHumpCase)
+  // log(humpCase2(testData))
+  // log(humpCase3(testData))
+  // log('testDataToHumpCase', testDataToHumpCase)
 }
 
 __main()
