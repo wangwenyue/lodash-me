@@ -34,28 +34,28 @@ const isObject = o => {
   return Object.prototype.toString.call(o) === '[object Object]'
 }
 
-const humpCase = obj => {
-  let clone = { ...obj }
-  Object.keys(clone).forEach(k => {
-    if (isObject(obj[k])) {
-      clone[toHumpCase(k)] = humpCase(obj[k])
-    } else {
-      clone[toHumpCase(k)] = obj[k]
-    }
-  })
-  if (Array.isArray(obj)) {
-    clone.length = obj.length
-    return Array.from(clone)
-  } else {
-    return clone
-  }
-}
+// const humpCase = obj => {
+//   let clone = {}
+//   Object.keys(clone).forEach(k => {
+//     if (isObject(obj[k])) {
+//       clone[toHumpCase(k)] = humpCase(obj[k])
+//     } else {
+//       clone[toHumpCase(k)] = obj[k]
+//     }
+//   })
+//   if (Array.isArray(obj)) {
+//     clone.length = obj.length
+//     return Array.from(clone)
+//   } else {
+//     return clone
+//   }
+// }
 
-const humpCase2 = obj => {
-  let clone = { ...obj }
-  Object.keys(clone).forEach(k => clone[toHumpCase(k)] = isObject(obj[k]) ? humpCase(obj[k]) : obj[k])
-  return Array.isArray(obj) ? (clone.length = obj.length && Array.from(clone)) : clone
-}
+// const humpCase2 = obj => {
+//   let clone = {...obj}
+//   Object.keys(obj).forEach(k => clone[toHumpCase(k)] = isObject(obj[k]) ? humpCase(obj[k]) : obj[k])
+//   return Array.isArray(obj) ? (clone.length = obj.length && Array.from(clone)) : clone
+// }
 
 const testDataToHumpCase = {
   aBbb: 123,
@@ -65,9 +65,23 @@ const testDataToHumpCase = {
   aDS: 1
 }
 
+const humpCase3 = (p, c = {}) => {
+  // Object.keys() 遍历可枚举自身属性
+  Object.keys(p).forEach(key => {
+    if (typeof p[key] === 'object') {
+      c[toHumpCase(key)] = Array.isArray(p[key]) ? [] : {}
+      humpCase3(p[key], c[toHumpCase(key)])
+    } else {
+      c[toHumpCase(key)] = p[key]
+    }
+  })
+  return c
+}
+
 const __main = () => {
-  log(humpCase(testData))
-  log(humpCase2(testData))
+  // log(humpCase(testData))
+  // log(humpCase2(testData))
+  log(humpCase3(testData))
   log('testDataToHumpCase', testDataToHumpCase)
 }
 
