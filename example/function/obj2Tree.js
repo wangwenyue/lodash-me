@@ -4,19 +4,6 @@ const ensureEqual = (a, b, message) => {
   a !== b ? log(`${message}, (${a}) 不等于 (${b})`) : log('测试成功')
 }
 
-const plain2Tree = obj => {
-  let res = {}
-  Object.keys(obj).map(key => {
-    const parent = obj[key].parent
-    if (parent === '') {
-      res = obj[key]
-    } else {
-      obj[parent][key] = obj[key]
-    }
-  })
-  return res
-}
-
 const deepEquals = (a, b) => {
   if (a === b) return true
 
@@ -37,6 +24,19 @@ const deepEquals = (a, b) => {
     if (!keys.every(key => deepEquals(a[key], b[key]))) return false
     return true
   }
+}
+
+const plain2Tree = obj => {
+  let res = {}
+  Object.keys(obj).map(key => {
+    const parent = obj[key].parent
+    if (parent === '') {
+      res = obj[key]
+    } else {
+      obj[parent][key] = obj[key]
+    }
+  })
+  return res
 }
 
 const testObj2Tree = () => {
