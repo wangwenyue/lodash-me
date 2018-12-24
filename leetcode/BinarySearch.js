@@ -11,7 +11,6 @@ const ensureEqual = (a, b, message) => {
  */
 
 const binarySearch = (nums, target) => {
-  // write your code here
   let start = 0
   let end = nums.length - 1
 
@@ -39,4 +38,3 @@ const __test = () => {
 }
 
 __test()
-
