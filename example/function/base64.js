@@ -22,14 +22,14 @@ const zerofill = str => {
   return str
 }
 
-const binary = n => {
-  return zerofill(n.toString(2))
-}
+const binary = n => zerofill(n.toString(2))
+
+const binary2 = n => n.toString(2).padStart(8, '0')
 
 const testBinary = () => {
   ensureEqual(binary(7), '00000111', 'test binary 1')
-  ensureEqual(binary(255), '11111111', 'test binary 2')
-  ensureEqual(binary(100), '01100100', 'test binary 3')
+  ensureEqual(binary2(255), '11111111', 'test binary 2')
+  ensureEqual(binary2(100), '01100100', 'test binary 3')
 }
 
 const int = bin => {
@@ -51,7 +51,7 @@ const lzero = bin => {
 // 手动模拟 parseInt, 2代表二进制，可以替换成任意进制
 const int2 = bin => {
   bin = lzero(bin)
-  revBin = [...bin].reverse()
+  let revBin = [...bin].reverse()
   return revBin.map((val, index) => {
     return val * Math.pow(2, index)
   }).reduce((a, b) => a + b)
@@ -80,9 +80,11 @@ const binaryStream = str => {
   return res
 }
 
+const binaryStream2 = str => [...str].map(char => binary(ascii(char))).join('')
+
 const testBinaryStream = () => {
   ensureEqual(binaryStream('Man'), '010011010110000101101110', 'test binary stream 1')
-  ensureEqual(binaryStream('is'), '0110100101110011', 'test binary stream 2')
+  ensureEqual(binaryStream2('is'), '0110100101110011', 'test binary stream 2')
 }
 
 /*
@@ -160,11 +162,7 @@ const base64Encode = str => {
   for (let i = 0; i < bins.length; i += 6) {
     const bin = bins.slice(i, i + 6)
     const b2int = int(bin)
-    if (b2int !== 0) {
-      res += ma64[b2int]
-    } else {
-      res += '='
-    }
+    b2int !== 0 ? res += ma64[b2int] : res += '='
   }
   return res
 }

@@ -3,6 +3,7 @@ const log = console.log.bind(console, '### applyOps')
 const ensureEqual = (a, b, message) => {
   a !== b ? log(`${message}, (${a}) 不等于 (${b})`) : log('测试成功')
 }
+
 /*
 实现 apply 函数
 参数如下
@@ -12,13 +13,11 @@ a b 分别是 2 个数字
 */
 
 const apply = (op, a, b) => {
-  const ops = ['+', '-', '*', '/',]
-  const calc = [a + b, a - b, a * b, a / b,]
+  const ops = ['+', '-', '*', '/']
+  const calc = [a + b, a - b, a * b, a / b]
   let res = 0
   ops.map((val, index) => {
-    if(op === val) {
-      res = calc[index]
-    }
+    if (op === val) res = calc[index]
   })
   return res
 }
@@ -43,7 +42,7 @@ log(n)
 
 const applyList = (op, oprands) => {
   let [head, ...tails] = oprands
-  for (tail of tails) {
+  for (let tail of tails) {
     head = apply(op, head, tail)
   }
   return head
@@ -67,13 +66,11 @@ expression 是一个 array(数组), 包含了 3 个元素
 
 const applyCompare = expression => {
   const [op, a, b] = expression
-  const ops = ['>', '===', '<',]
-  const cmp = [a > b, a === b, a < b,]
+  const ops = ['>', '===', '<']
+  const cmp = [a > b, a === b, a < b]
   let res = false
   ops.map((val, index) => {
-    if (op === val) {
-      res = cmp[index]
-    }
+    if (op === val) res = cmp[index]
   })
   return res
 }

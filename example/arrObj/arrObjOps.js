@@ -129,9 +129,7 @@ const testFindAllString = () => {
 const endsWith1 = (s1, s2) => {
   const len1 = s1.length
   const len2 = s2.length
-  if (len1 < len2) {
-    return false
-  }
+  if (len1 < len2) return false
   const s1Rev = [...s1].reverse().join()
   const s2Rev = [...s2].reverse().join()
   return startsWith(s1Rev, s2Rev)
@@ -144,27 +142,28 @@ const endsWith2 = (s1, s2) => {
   return len1 < len2 ? false : s1.slice(len1 - len2) === s2
 }
 
+const endsWith3 = (s1, s2) => s1.lastIndexOf(s2) === s1.length - s2.length
+
 const testEndsWith = () => {
   ensureEqual(endsWith1('koakoa', 'koakoa'), true, 'endsWith error 1')
   ensureEqual(endsWith2('koakoa', 'melon'), false, 'endsWith error 2')
-  ensureEqual(endsWith1('melonkoa', 'koa'), true, 'endsWith error 3')
+  ensureEqual(endsWith3('melonkoa', 'koa'), true, 'endsWith error 3')
 }
 
-// 实现 Max 函数
-const max = arr => {
+
+// 实现 arrMax 函数
+const arrMax = arr => {
   let [head, ...tails] = arr
-  tails.map(val => {
-    head = val > head ? val : head
-  })
+  tails.map(val => head = val > head ? val : head)
   return head
 }
 
-const max2 = arr => Math.max(...arr)
+const arrMax2 = arr => Math.max(...arr)
 
 const testMax = () => {
-  ensureEqual(max([1, 2, 3]), 3, 'max error 1')
-  ensureEqual(max([-1, 10, 3]), 10, 'max error 2')
-  ensureEqual(max2([1, 2, 2]), 2, 'max error 3')
+  ensureEqual(arrMax([1, 2, 3]), 3, 'max error 1')
+  ensureEqual(arrMax([-1, 10, 3]), 10, 'max error 2')
+  ensureEqual(arrMax2([1, 2, 2]), 2, 'max error 3')
 }
 
 /*
@@ -181,12 +180,13 @@ const testMax = () => {
 const topStudent = obj => {
   const scores = []
   Object.keys(obj).map(o => scores.push(obj[o].score))
-  const idx = scores.indexOf(max(scores))
+  const idx = scores.indexOf(arrMax(scores))
   return obj[idx]
 }
 
-const topStudent2 = obj => scores = obj.sort(compare('score'))[0]
+const topStudent2 = obj => obj.sort(compare('score'))[0]
 
+// 根据某一个属性进行排序
 const compare = prop => {
   return function (a, b) {
     // b - a 降序排列
@@ -232,21 +232,21 @@ const testTopStudent = () => {
   log(Evelynn)
 }
 
- /*
-  price 是一个 int
-  grade 合法情况下一共 6 种取值, 还可能没有给出这个参数
-      '小学生'
-      '初中生'
-      '高中生'
-      '大学生'
-      '研究生'
-  对应的折扣分别是 5 6 7 8 9
+/*
+ price 是一个 int
+ grade 合法情况下一共 6 种取值, 还可能没有给出这个参数
+     '小学生'
+     '初中生'
+     '高中生'
+     '大学生'
+     '研究生'
+ 对应的折扣分别是 5 6 7 8 9
 
-  注意, 如果调用者没有给出 grade 参数, 没有折扣
+ 注意, 如果调用者没有给出 grade 参数, 没有折扣
 
-  返回折扣后的价格
+ 返回折扣后的价格
 
-  这种使用字典 (object) 解决很多个 if else if 的问题的方法叫做表驱动法
+ 这种使用字典 (object) 解决很多个 if else if 的问题的方法叫做表驱动法
 */
 
 const discount = (price, grade) => {

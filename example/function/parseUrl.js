@@ -15,6 +15,7 @@ const ensure = (condition, message) => {
   如果没有省略, 则按照 url 中协议部分的解析
   返回代表协议的字符串, 'http' 或者 'https'
 */
+
 const urls = [
   ['g.cn', 'http', 'g.cn', 80, '/'],
   ['g.cn/', 'http', 'g.cn', 80, '/'],
@@ -41,19 +42,10 @@ const testProtocolOfUrl = () => {
 */
 
 const hostOfUrl = url => {
-  let host = ''
-  let u = ''
-  if(url.startsWith('https://') || url.startsWith('http://')) {
-    u = url.split('://')[1]
-  } else {
-    u = url
-  }
+  let u = url.startsWith('https://') || url.startsWith('http://') ?
+    url.split('://')[1] : url
   const idx = u.indexOf(':')
-  if (idx > -1) {
-    host = u.slice(0, idx)
-  } else {
-    host = u.split('/')[0]
-  }
+  let host = idx > -1 ? u.slice(0, idx) : u.split('/')[0]
   return host
 }
 
@@ -77,16 +69,14 @@ const portOfUrl = url => {
     'http': 80,
     'https': 443,
   }
+  let u = ''
   // 设置一个默认的 protocol 和 port
   let [protocol, port] = ['http', 80]
-  if(url.startsWith('https://') || url.startsWith('http://')) {
-    [protocol, u] = url.split('://')
-  } else {
-    u = url
-  }
+  url.startsWith('https://') || url.startsWith('http://') ?
+    [protocol, u] = url.split('://') : u = url
   const idx = u.indexOf(':')
   // 如果有 ：, 就证明存在端口号
-  if(idx > -1) {
+  if (idx > -1) {
     // g.cn:3000/search --> 3000/search
     u = u.slice(idx + 1)
     port = Number(u.split('/')[0])
@@ -112,18 +102,11 @@ const testPortOfUrl = () => {
 */
 
 const pathOfUrl = url => {
-  let u = ''
-  if (url.startsWith('https://') || url.startsWith('http://')) {
-    u = url.split('://')[1]
-  } else {
-    u = url
-  }
+  let u = url.startsWith('https://') || url.startsWith('http://') ?
+    url.split('://')[1] : url
   let path = '/'
   const idx = u.indexOf('/')
-  if (idx > -1) {
-    path = u.slice(idx)
-  }
-  return path
+  return idx > -1 ? u.slice(idx) : path
 }
 
 const testPathOfUrl = () => {

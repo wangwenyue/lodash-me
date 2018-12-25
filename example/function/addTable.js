@@ -5,15 +5,8 @@ const ensureEqual = (a, b, message) => {
 }
 
 const arrayEquals = (arr1, arr2) => {
-  if (arr1.length !== arr2.length) {
-    return false
-  }
-  for (let idx = 0; idx < arr1.length; idx++) {
-    if (arr1[idx] !== arr2[idx]) {
-      return false
-    }
-  }
-  return true
+  if (arr1.length !== arr2.length) return false
+  return arr1.every((val, idx) => val === arr2[idx])
 }
 
 /*
@@ -108,11 +101,6 @@ const testRange2 = () => {
 
   提示：
       判断 start 和 end 的大小，然后循环生成数组
-
-  分步提示：
-      1. 如果 start < end，调用作业 8 的 range2
-      2. 否则，类似作业 8，循环从 start 开始，到 end 结束（不包括 end），每次递减 step
-      3. 返回数组
 */
 
 const range3 = (start, end, step) => {
@@ -120,7 +108,7 @@ const range3 = (start, end, step) => {
   if (step > 0) {
     return range2(start, end, step)
   } else {
-    for (let i = start; i > end; i--) {
+    for (let i = start; i > end; i += step) {
       res.push(i)
     }
   }
@@ -129,10 +117,10 @@ const range3 = (start, end, step) => {
 
 const testRange3 = () => {
   const test1 = range3(1, 5, 1)
-  const test2 = range3(6, 0, -1)
+  const test2 = range3(6, 0, -2)
 
   ensureEqual(arrayEquals(test1, [1, 2, 3, 4]), true, 'range3 test 1')
-  ensureEqual(arrayEquals(test2, [6, 5, 4, 3, 2, 1]), true, 'range3 test 2')
+  ensureEqual(arrayEquals(test2, [6, 4, 2]), true, 'range3 test 2')
 }
 
 const __main = () => {

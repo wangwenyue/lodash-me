@@ -11,8 +11,7 @@ const deepEquals = (a, b) => {
   if (a && b && typeof a === 'object' && typeof b === 'object' ) {
     if (Array.isArray(a) && Array.isArray(b)) {
       if (a.length !== b.length) return false
-      if (!a.every((item, index) => deepEquals(item, b[index]))) return false
-      return true
+      return a.every((item, index) => deepEquals(item, b[index]))
     }
 
     if (a instanceof Date && b instanceof Date) return a.getTime() === b.getTime()
@@ -22,8 +21,7 @@ const deepEquals = (a, b) => {
     const keys = Object.keys(a)
     if (keys.length !== Object.keys(b).length) return false
     if (!keys.every(key => Object.prototype.hasOwnProperty.call(b, key))) return false
-    if (!keys.every(key => deepEquals(a[key], b[key]))) return false
-    return true
+    return keys.every(key => deepEquals(a[key], b[key]))
   }
 }
 
@@ -67,10 +65,10 @@ const deepEquals3 = (a, b) => {
 
   if (a && b && typeof a === 'object' && typeof b === 'object') {
     if (Array.isArray(a) && Array.isArray(b)) {
-      const cond1 = a.length !== b.length
-      const cond2 = !a.every((val, index) => deepEquals(val, b[index]))
-      if (cond1 || cond2) return false
-      return true
+      const cond1 = a.length === b.length
+      const cond2 = a.every((val, index) => deepEquals(val, b[index]))
+      return cond1 && cond2
+
     }
 
     if (a instanceof Date && b instanceof Date) return a.getTime() === b.getTime()
@@ -78,11 +76,11 @@ const deepEquals3 = (a, b) => {
 
     const keys = Object.keys(a)
     const len = keys.length
-    const cond1 = len !== Object.keys(b).length
-    const cond2 = !keys.every(key => Object.prototype.hasOwnProperty.call(b, key))
-    const cond3 = !keys.every(key => deepEquals(a[key], b[key]))
-    if (cond1 || cond2 || cond3) return false
-    return true
+    const cond1 = len === Object.keys(b).length
+    const cond2 = keys.every(key => Object.prototype.hasOwnProperty.call(b, key))
+    const cond3 = keys.every(key => deepEquals(a[key], b[key]))
+    return cond1 && cond2 && cond3
+
   }
 }
 

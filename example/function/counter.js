@@ -4,8 +4,8 @@ const ensureEqual = (a, b, message) => {
   a !== b ? log(`${message}, (${a}) 不等于 (${b})`) : log('测试成功')
 }
 
-var counter = (function () {
-  var i = 0
+const counter = (function () {
+  let i = 0
   return function () {
     i++
     return i
