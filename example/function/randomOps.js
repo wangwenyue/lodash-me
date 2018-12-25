@@ -99,9 +99,31 @@ const rand9 = () => {
   return Math.floor(res / 4)
 }
 
+const rand7 = () => {
+  let res = 42
+  while (res > 40) {
+    let a = rand6()
+    let b = rand6()
+    res = a * 7 + b
+  }
+  return Math.floor(res / 6)
+}
+
+const rand5 = () => {
+  let res = 42
+  while (res > 40) {
+    let a = rand6()
+    let b = rand6()
+    res = a * 7 + b
+  }
+  return Math.floor(res / 8)
+}
+
 const __main = () => {
   testRandom()
   log('randomK', randomK(10, 20, 5))
+  log(rand5())
+  log(rand7())
   log(rand9())
 }
 

@@ -4,7 +4,7 @@ const ensureEqual = (a, b, message) => {
   a !== b ? log(`${message}, (${a}) 不等于 (${b})`) : log('测试成功')
 }
 
-const reverse = (str) => {
+const reverse = str => {
   const arr = [...str]
   const len = arr.length
   const newArr = []

@@ -1,7 +1,7 @@
 const log = console.log.bind(console, '### shallowClone')
 
 const shallowClone = src => {
-  let dst = {}
+  const dst = {}
   // for in 遍历可枚举的自身属性以及继承属性
   // for(let prop in src) {
   //   dst[prop] = src[prop]
