@@ -13,8 +13,8 @@ const ensureEqual = (a, b, message) => {
 
 const join = (delimiter, array) => {
   let res = array[0]
-  for (let idx = 1; idx < array.length; idx++) {
-    res += (delimiter + array[idx])
+  for (let ele of array.slice(1)) {
+    res += (delimiter + ele)
   }
   return res
 }
@@ -38,15 +38,8 @@ const testJoin = () => {
 
 // 判断数组相等
 const arrayEquals = (arr1, arr2) => {
-  if (arr1.length !== arr2.length) {
-    return false
-  }
-  for (let idx = 0; idx < arr1.length; idx++) {
-    if (arr1[idx] !== arr2[idx]) {
-      return false
-    }
-  }
-  return true
+  if (arr1.length !== arr2.length) return false
+  return arr1.every((val, index) => val === arr2[index])
 }
 
 const split = (str, delimiter=' ') => {
@@ -130,7 +123,7 @@ const str2 = n => {
   const arr = str1(n)
   const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   let res = ''
-  for (char of arr) {
+  for (let char of arr) {
     res += upper[parseInt(char, 10) - 1]
   }
   return res

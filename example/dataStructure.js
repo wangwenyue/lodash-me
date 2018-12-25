@@ -4,13 +4,6 @@ const ensureEqual = (a, b, message) => {
   a !== b ? log(`${message}, (${a}) 不等于 (${b})`) : log('测试成功')
 }
 
-const arrayEquals = (arr1, arr2) => {
-  if (arr1.length !== arr2.length) {
-    return false
-  }
-  return JSON.stringify(arr1) === JSON.stringify(arr2)
-}
-
 // 模拟栈
 class Stack {
   constructor() {
@@ -52,23 +45,18 @@ const testStack = () => {
 */
 
 const popBrackets = (item, res) => {
+  // 这里用 === 会判断失败？？？
   const case1 = item == ')' && res.slice(-1) == '('
   const case2 = item == ']' && res.slice(-1) == '['
   const case3 = item == '}' && res.slice(-1) == '{'
-  if (case1 || case2 || case3) {
-    res.pop()
-  }
+  if (case1 || case2 || case3) res.pop()
 }
 
 const validPair = s => {
   const res = []
   const valid = ['(', '[', '{']
-  for (item of s) {
-    if (valid.includes(item)) {
-      res.push(item)
-    } else {
-      popBrackets(item, res)
-    }
+  for (let item of s) {
+    valid.includes(item) ? res.push(item) : popBrackets(item, res)
   }
   return res.length === 0
 }
@@ -82,6 +70,8 @@ const testValidPair = () => {
   ensureEqual(validPair(test2), true, 'test2 failed')
   ensureEqual(validPair(test3), false, 'test3 failed')
 }
+
+testValidPair()
 
 // 实现一个 node
 class Node {

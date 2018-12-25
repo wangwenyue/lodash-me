@@ -1,10 +1,10 @@
 // 节流 throttle
-const throttle = (fn, delay) => {
+const throttle = (fn, interval) => {
   let last = 0
-  return function() {
+  return function () {
     let [ctx, args] = [this, arguments]
     let now = new Date()
-    if(now - last >= delay) {
+    if (now - last >= interval) {
       last = now
       fn.apply(ctx, args)
     }
@@ -12,9 +12,6 @@ const throttle = (fn, delay) => {
 }
 
 // 测试
-const log1 = () => {
-  console.log('throttle 滚动事件')
-}
 // 每 1s 周期内只会打印一次 console
 // document.addEventListener('scroll', throttle(log1, 1000))
 
@@ -52,7 +49,7 @@ const testThrottle3 = () => {
 // 防抖
 const debounce = (fn, delay) => {
   let timer = null
-  return function() {
+  return function () {
     let [ctx, args] = [this, arguments]
     if (timer) {
       clearTimeout(timer)

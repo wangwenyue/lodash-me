@@ -9,10 +9,10 @@ const deepEquals = (a, b) => {
 
   if (a && b && typeof a === 'object' && typeof b === 'object') {
     if (Array.isArray(a) && Array.isArray(b)) {
-      const cond1 = a.length !== b.length
-      const cond2 = !a.every((val, index) => deepEquals(val, b[index]))
-      if (cond1 || cond2) return false
-      return true
+      const cond1 = a.length === b.length
+      const cond2 = a.every((val, index) => deepEquals(val, b[index]))
+      return cond1 && cond2
+
     }
 
     if (a instanceof Date && b instanceof Date) return a.getTime() === b.getTime()
@@ -20,13 +20,13 @@ const deepEquals = (a, b) => {
 
     const keys = Object.keys(a)
     const len = keys.length
-    const cond1 = len !== Object.keys(b).length
-    const cond2 = !keys.every(key => Object.prototype.hasOwnProperty.call(b, key))
-    const cond3 = !keys.every(key => deepEquals(a[key], b[key]))
-    if (cond1 || cond2 || cond3) return false
-    return true
+    const cond1 = len === Object.keys(b).length
+    const cond2 = keys.every(key => Object.prototype.hasOwnProperty.call(b, key))
+    const cond3 = keys.every(key => deepEquals(a[key], b[key]))
+    return cond1 && cond2 && cond3
   }
 }
+
 
 /**
  *
@@ -66,7 +66,7 @@ const humpCase = (p, c = {}) => {
 const toUnderscoreCase = str => {
   const arrStr = [...str]
   return arrStr.map(char => {
-    return char = char !== char.toLowerCase() ? `_${char.toLowerCase()}` : char
+    return char !== char.toLowerCase() ? `_${char.toLowerCase()}` : char
   }).join('')
 }
 

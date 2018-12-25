@@ -16,10 +16,11 @@ var data = [{
   "name": "九寨沟"
 }]
 
-var keys = ['province', 'city', 'name']
+const keys = ['province', 'city', 'name']
 
-var transObject = function (tableData, keys) {
-  let hashTable = {}, res = []
+const transObject = (tableData, keys) => {
+  let hashTable = {}
+  let res = []
   for (let i = 0; i < tableData.length; i++) {
     let arr = res, cur = hashTable
     for (let j = 0; j < keys.length; j++) {

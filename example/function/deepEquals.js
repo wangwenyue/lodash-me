@@ -80,7 +80,6 @@ const deepEquals3 = (a, b) => {
     const cond2 = keys.every(key => Object.prototype.hasOwnProperty.call(b, key))
     const cond3 = keys.every(key => deepEquals(a[key], b[key]))
     return cond1 && cond2 && cond3
-
   }
 }
 

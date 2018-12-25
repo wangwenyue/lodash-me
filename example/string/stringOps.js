@@ -137,12 +137,7 @@ const testCenter = () => {
   返回 boolean, 如果 s 中包含的只有空格则返回 true, 否则返回 false
 */
 
-const isSpace = s => {
-  if(s.length === 0) {
-    return false
-  }
-  return s.trim().length === 0
-}
+const isSpace = s => s.length === 0 ? false : s.trim().length === 0
 
 const testIsSpace = () => {
   ensureEqual(isSpace(' '), true, 'isSpace error 1')
@@ -159,15 +154,10 @@ const testIsSpace = () => {
 
 const isDigit = s => {
   const digits = '0123456789'
-  for(str of s) {
-    if(!digits.includes(str)) {
-      return false
-    }
-  }
-  return true
+  return [...s].every(num => digits.includes(num))
 }
 
-var testIsDigit = function () {
+const testIsDigit = () => {
   ensureEqual(isDigit('123'), true, 'isDigit error 1')
   ensureEqual(isDigit('0'), true, 'isDigit error 2')
   ensureEqual(isDigit('  '), false, 'isDigit error 3')
@@ -183,11 +173,9 @@ var testIsDigit = function () {
 */
 
 const stripLeft = s => {
-  if (s.length === 0 || isSpace(s)) {
-    return ''
-  }
+  if (s.length === 0 || isSpace(s)) return ''
   let idx = 0
-  for (char of s) {
+  for (let char of s) {
     if (char !== ' ') {
       idx = s.indexOf(char)
       break
@@ -211,9 +199,7 @@ const testStripLeft = () => {
 */
 
 const stripRight = s => {
-  if (s.length === 0 || isSpace(s)) {
-    return ''
-  }
+  if (s.length === 0 || isSpace(s)) return ''
   let idx = s.length
   for (let i = idx - 1; i >= 0; i--) {
     if (s[i] !== ' ') {
@@ -226,9 +212,7 @@ const stripRight = s => {
 
 // 复用 stripLeft
 const stripRight2 = s => {
-  if (s.length === 0 || isSpace(s)) {
-    return ''
-  }
+  if (s.length === 0 || isSpace(s)) return ''
   // 'kfc   ' -> '   cfk'
   const reverseStr = [...s].reverse().join('')
   // '   cfk' -> 'cfk'
@@ -250,9 +234,7 @@ const testStripRight = () =>  {
   返回 string
 */
 
-const strip = s => {
-  return stripLeft(stripRight(s))
-}
+const strip = s => stripLeft(stripRight(s))
 
 const testStrip = () => {
   ensureEqual(strip('  koa'), 'koa', 'strip error 1')
@@ -271,18 +253,20 @@ const findIndex = (s1, s2) => {
   const len2 = s2.length
   for (let i = 0; i <= len1; i++) {
     const s = s1.slice(i, i + len2)
-    if (s === s2) {
-      return i
-    }
+    if (s === s2) return i
   }
   return -1
 }
 
+const findIndex2 = (s1, s2) => s1.indexOf(s2)
+
 const testFindIndex = () => {
   ensureEqual(findIndex('kfcolas', 'kfc'), 0, 'findIndex error 1')
-  ensureEqual(findIndex('fcolas', 'kfc'), -1, 'findIndex error 2')
-  ensureEqual(findIndex('cokfclakfcs', 'kfc'), 2, 'findIndex error 3')
+  ensureEqual(findIndex2('fcolas', 'kfc'), -1, 'findIndex error 2')
+  ensureEqual(findIndex2('cokfclakfcs', 'kfc'), 2, 'findIndex error 3')
 }
+
+testFindIndex()
 
 /*
   3 个参数 s old newString 都是字符串
