@@ -12,10 +12,7 @@ const ensureEqual = (a, b, message) => {
   用它实现本函数, 返回 0 或 1
 */
 
-const random01 = () => {
-  const n = Math.random()
-  return n > 0.5 ? 1 : 0
-}
+const random01 = () => Math.random() > 0.5 ? 1 : 0
 
 //通用写法
 const _random01 = () => {
@@ -83,9 +80,29 @@ const testRandom = () => {
   ensureEqual(randomScale(10, 11, randomNM(10, 11)), true, 'testRandom error 4')
 }
 
+/**
+ * 问题：给定一个返回 0 ~ 6 的随机自然数的函数，记为 rand6()，
+ * 则如何用 rand6() 函数构造返回0~9随机自然数的函 rand9()？
+ * https://blog.csdn.net/wxbmelisky/article/details/50521435
+ */
+
+const rand6 = () => randomNM(0, 6)
+
+const rand9 = () => {
+  // 给 res 一个初始值，启动 while 循环
+  let res = 40
+  while (res >= 40) {
+    let a = rand6()
+    let b = rand6()
+    res = a * 7 + b
+  }
+  return Math.floor(res / 4)
+}
+
 const __main = () => {
   testRandom()
   log('randomK', randomK(10, 20, 5))
+  log(rand9())
 }
 
 __main()
