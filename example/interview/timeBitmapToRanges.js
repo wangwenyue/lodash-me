@@ -9,9 +9,9 @@
 // 示例输入：`"110010000000000000000000000000000000000000000000"`
 // 示例输出：`["00:00~01:00", "02:00~02:30"]`
 
-const log = console.log.bind(console)
+const log = console.log.bind(console, '### timeBitmapToRanges')
 
-let bitmap = '110010000000000000000000000000000000000001111100'
+const bitmap = '110010000000000000000000000000000000000000000000'
 
 const encodeHour = num => num < 10 ? `0${num}` : num
 
@@ -24,8 +24,8 @@ const flatten = arr => {
 
 const timeBitmapToRanges = bitmap => {
   let list = []
-  const len = bitmap.length
-  for (let i = 0; i < len; i += 2) {
+  const lenb = bitmap.length
+  for (let i = 0; i < lenb; i += 2) {
     let s = bitmap.slice(i, i + 2)
     list.push(s)
   }
@@ -56,9 +56,10 @@ const timeBitmapToRanges = bitmap => {
 
   // 两两切分，调整输出格式
   result = []
-  for (let i = 0; i < [...s].length; i += 2) {
-    let ele = [...s].slice(i, i + 2)
-    result.push(`${ele[0]} ~ ${ele[1]}`)
+  const lens = [...s].length
+  for (let i = 0; i < lens; i += 2) {
+    const [start, end] = [...s].slice(i, i + 2)
+    result.push(`${start} ~ ${end}`)
   }
   return result
 }
