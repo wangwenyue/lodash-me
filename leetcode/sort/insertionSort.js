@@ -9,6 +9,7 @@ const arrayEquals = (arr1, arr2) => {
   return arr1.every((val, index) => val === arr2[index])
 }
 
+// 默认第一个是排好序的，后面的元素依次和前一个比较，如果小于前面的，就交换
 const insertionSort = arr => {
   const len = arr.length
   if (len <= 1) return arr
