@@ -9,11 +9,12 @@ const arrayEquals = (arr1, arr2) => {
   return arr1.every((val, index) => val === arr2[index])
 }
 
+// 大的向后移动，from tail to head sort
 const bubbleSort = arr => {
   const len = arr.length
   if (len <= 1) return arr
   for (let i = 0; i < len; i++) {
-    for(let j = 0; j < len; j ++) {
+    for(let j = 0; j < len - i; j++) {
       if (arr[j] > arr[j + 1] ) {
         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
       }
