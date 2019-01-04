@@ -48,11 +48,7 @@ const _random2050 = () => {
  * 返回一个 n ~ m 之间的整数
  */
 
-const randomNM = (n, m) => {
-  let num = Math.random()
-  num = Math.floor(num * (m - n))
-  return num + n
-}
+const randomNM = (n, m) => Math.floor(Math.random() * (m - n) + n)
 
 /**
  * n < m, 且 n, m, k 均为整数,
